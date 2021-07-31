@@ -32,6 +32,7 @@
 - Spring Boot
 - Spring MVC
 - Spring JPA
+- Maven
 - AWS EC2
 - AWS RDS
 
