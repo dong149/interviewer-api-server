@@ -7,21 +7,18 @@ import com.interview.api.entity.link.Link;
 import com.interview.api.entity.pack.Pack;
 import com.interview.api.entity.problem.Problem;
 import com.interview.api.repository.pack.PackJpaRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class PackService {
 
 
     private final PackJpaRepository packJpaRepository;
-
-
-    public PackService(PackJpaRepository packJpaRepository) {
-        this.packJpaRepository = packJpaRepository;
-    }
 
     public List<Pack> getPacks() {
         return packJpaRepository.findAllByDeletedAtIsNull();
