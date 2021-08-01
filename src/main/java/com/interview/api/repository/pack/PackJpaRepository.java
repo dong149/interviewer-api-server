@@ -8,6 +8,8 @@ import java.util.List;
 
 public interface PackJpaRepository extends JpaRepository<Pack,Long> {
 
-    @Query("SELECT p from Pack p where p.deletedAt IS NOT NULL")
+    @Query("SELECT p from Pack p where p.deletedAt IS NULL")
     List<Pack> findAllExists();
+
+    List<Pack> findAllByDeletedAtIsNull();
 }

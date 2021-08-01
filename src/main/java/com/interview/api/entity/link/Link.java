@@ -1,5 +1,9 @@
 package com.interview.api.entity.link;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -9,6 +13,11 @@ import java.time.LocalDateTime;
 추천 링크
  */
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@Getter
+@Table(name = "links")
 public class Link {
 
     /*
