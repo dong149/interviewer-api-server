@@ -1,7 +1,12 @@
 package com.interview.api.entity.problem;
 
 
+import com.interview.api.entity.link.Link;
+import org.hibernate.annotations.CreationTimestamp;
+
 import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.util.List;
 
 /*
 문제
@@ -9,7 +14,6 @@ import javax.persistence.*;
 @Entity
 public class Problem {
 
-    // TODO : 설계 마무리 및 Column 추가
     /*
     id : Problem Id
     content : 문제 지문
@@ -23,4 +27,24 @@ public class Problem {
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column
+    private String content;
+
+    @Column
+    private String answer;
+
+    @Column
+    private Long packId;
+
+    @OneToMany
+    private List<Link> links;
+
+    @CreationTimestamp
+    private LocalDateTime createdAt;
+
+    @Column
+    private LocalDateTime deletedAt;
+
+
 }

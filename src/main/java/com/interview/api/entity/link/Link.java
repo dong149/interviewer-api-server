@@ -1,6 +1,9 @@
 package com.interview.api.entity.link;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 /*
 추천 링크
@@ -8,7 +11,6 @@ import javax.persistence.*;
 @Entity
 public class Link {
 
-    // TODO : 설계 마무리 및 Column 추가
     /*
     id : Link Id
     url : url 주소
@@ -20,5 +22,18 @@ public class Link {
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column
+    private String url;
+
+    @Column
+    private Long problemId;
+
+    @CreationTimestamp
+    private LocalDateTime createdAt;
+
+    @Column
+    private LocalDateTime deletedAt;
+
 
 }

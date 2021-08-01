@@ -1,6 +1,11 @@
 package com.interview.api.entity.pack;
 
+import com.interview.api.entity.problem.Problem;
+import org.hibernate.annotations.CreationTimestamp;
+
 import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.util.List;
 
 /*
 문제 모음
@@ -8,7 +13,6 @@ import javax.persistence.*;
 @Entity
 public class Pack {
 
-    // TODO : 설계 마무리 및 Column 추가
     /*
     id : Pack Id
     List<Problem> : 문제 list
@@ -19,6 +23,16 @@ public class Pack {
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @OneToMany
+    private List<Problem> problems;
+
+    @CreationTimestamp
+    private LocalDateTime createdAt;
+
+    @Column
+    private LocalDateTime deletedAt;
+
 
 
 }
