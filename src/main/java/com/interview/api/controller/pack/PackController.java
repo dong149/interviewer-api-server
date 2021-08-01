@@ -6,6 +6,7 @@ import com.interview.api.dto.request.pack.PackRequestDto;
 import com.interview.api.dto.response.pack.PackResponseDto;
 import com.interview.api.service.pack.PackService;
 import io.swagger.annotations.*;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,13 +16,10 @@ import java.util.List;
 @RestController
 @Api(tags = {"1. Pack"})
 @RequestMapping(value = "api/v1/interviewer")
+@RequiredArgsConstructor
 public class PackController {
 
     private final PackService packService;
-
-    public PackController(PackService packService) {
-        this.packService = packService;
-    }
 
     @GetMapping
     @ApiOperation(value = "pack", notes = "pack 전체 조회")
