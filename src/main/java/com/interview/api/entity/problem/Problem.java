@@ -37,7 +37,8 @@ public class Problem {
     @Column
     private Long packId;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "linkId")
     private List<Link> links;
 
     @CreationTimestamp

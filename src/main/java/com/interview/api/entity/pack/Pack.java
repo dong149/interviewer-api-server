@@ -1,6 +1,7 @@
 package com.interview.api.entity.pack;
 
 import com.interview.api.entity.problem.Problem;
+import lombok.Getter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -11,6 +12,7 @@ import java.util.List;
 문제 모음
  */
 @Entity
+@Getter
 public class Pack {
 
     /*
@@ -24,7 +26,8 @@ public class Pack {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "packId")
     private List<Problem> problems;
 
     @CreationTimestamp
