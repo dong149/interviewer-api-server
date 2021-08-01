@@ -3,9 +3,12 @@ package com.interview.api.service.pack;
 
 import com.interview.api.dto.request.link.LinkDto;
 import com.interview.api.dto.request.problem.ProblemDto;
+import com.interview.api.dto.response.pack.PackResponseDto;
+import com.interview.api.entity.category.Category;
 import com.interview.api.entity.link.Link;
 import com.interview.api.entity.pack.Pack;
 import com.interview.api.entity.problem.Problem;
+import com.interview.api.repository.category.CategoryJpaRepository;
 import com.interview.api.repository.pack.PackJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,12 +22,32 @@ public class PackService {
 
 
     private final PackJpaRepository packJpaRepository;
+    private final CategoryJpaRepository categoryJpaRepository;
 
-    public List<Pack> getPacks() {
-        return packJpaRepository.findAllByDeletedAtIsNull();
+    public List<PackResponseDto> getPacks() {
+
+
+        List<Pack> packs =  packJpaRepository.findAllByDeletedAtIsNull();
+        List<PackResponseDto> packResponseDtos = new ArrayList<>();
+
+        for(Pack pack : packs){
+            Long categoryId;
+
+            Category category = pack.getCategory();
+//            Category category = categoryJpaRepository.findById(categoryId).orElseThrow();
+
+            packResponseDtos.add(PackResponseDto.of(pack,category));
+
+
+        }
+        return packResponseDtos;
     }
 
-    public boolean createPack(List<ProblemDto> problemDtos) {
+    public boolean createPack(List<ProblemDto> problemDtos,Long categoryId) {
+
+        Category category = categoryJpaRepository.findById(categoryId).orElseThrow(()->{
+            throw new IllegalArgumentException();
+        });
 
         List<Problem> problems = new ArrayList<>();
         for (ProblemDto problemDto : problemDtos) {
@@ -44,6 +67,7 @@ public class PackService {
 
         Pack pack = Pack.builder()
                 .problems(problems)
+                .category(category)
                 .build();
 
         packJpaRepository.save(pack);

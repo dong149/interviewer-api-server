@@ -1,5 +1,6 @@
 package com.interview.api.entity.pack;
 
+import com.interview.api.entity.category.Category;
 import com.interview.api.entity.problem.Problem;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -42,6 +43,10 @@ public class Pack {
 
     @Column
     private LocalDateTime deletedAt;
+
+    @ManyToOne(targetEntity = Category.class, fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id")
+    private Category category;
 
 
 
