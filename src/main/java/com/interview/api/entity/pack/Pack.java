@@ -1,7 +1,10 @@
 package com.interview.api.entity.pack;
 
 import com.interview.api.entity.problem.Problem;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -13,6 +16,10 @@ import java.util.List;
  */
 @Entity
 @Getter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@Table(name = "packs")
 public class Pack {
 
     /*

@@ -2,6 +2,10 @@ package com.interview.api.entity.problem;
 
 
 import com.interview.api.entity.link.Link;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -12,6 +16,11 @@ import java.util.List;
 문제
  */
 @Entity
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Table(name = "problems")
 public class Problem {
 
     /*
@@ -38,7 +47,7 @@ public class Problem {
     private Long packId;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "linkId")
+    @JoinColumn(name = "problemId")
     private List<Link> links;
 
     @CreationTimestamp
