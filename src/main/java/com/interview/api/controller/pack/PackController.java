@@ -23,22 +23,21 @@ public class PackController {
 
     @GetMapping
     @ApiOperation(value = "pack", notes = "pack 전체 조회")
-    public ResponseEntity<BaseResponseDto> getPacks(){
+    public ResponseEntity<BaseResponseDto> getPacks() {
         return new ResponseEntity<>(new BaseResponseDto(HttpStatus.OK.value(), "pack 전체 조회 성공", packService.getPacks()), HttpStatus.OK);
     }
 
-//    @GetMapping
-//    public ResponseEntity<BaseResponseDto> getPackById(){
-//        return new ResponseEntity<>(new BaseResponseDto(HttpStatus.OK.value(), "Id로 pack 조회 성공", "OK"), HttpStatus.OK);
-//    }
+    @GetMapping(value = "/{id}")
+    @ApiOperation(value = "pack", notes = "Id로 pack 조회")
+    public ResponseEntity<BaseResponseDto> getPackById(@PathVariable Long id) {
+        return new ResponseEntity<>(new BaseResponseDto(HttpStatus.OK.value(), "Id로 pack 조회 성공", packService.getPackById(id)), HttpStatus.OK);
+    }
 
     @PostMapping
     @ApiOperation(value = "pack", notes = "pack 생성")
-    public ResponseEntity<BaseResponseDto> createPack(@RequestBody PackRequestDto packRequestDto){
-        return new ResponseEntity<>(new BaseResponseDto(HttpStatus.CREATED.value(), "pack 생성 성공", packService.createPack(packRequestDto.getProblems(),packRequestDto.getCategoryId())), HttpStatus.CREATED);
+    public ResponseEntity<BaseResponseDto> createPack(@RequestBody PackRequestDto packRequestDto) {
+        return new ResponseEntity<>(new BaseResponseDto(HttpStatus.CREATED.value(), "pack 생성 성공", packService.createPack(packRequestDto.getProblems(), packRequestDto.getCategoryId())), HttpStatus.CREATED);
     }
-
-
 
 
 }
