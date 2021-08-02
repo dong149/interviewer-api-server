@@ -5,6 +5,7 @@ import com.interview.api.dto.common.ErrorResponseDto;
 import com.interview.api.enumerator.ErrorType;
 import com.interview.api.exception.category.CategoryNotFoundException;
 import com.interview.api.exception.pack.PackNotFoundException;
+import com.interview.api.exception.problem.ProblemNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,6 +38,13 @@ public class ExceptionControllerAdvice {
         log.error(e.getMessage(), e);
         return error(ErrorType.NOT_FOUND_ERROR, HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(ProblemNotFoundException.class)
+    public ResponseEntity<ErrorResponseDto> handleProblemNotFoundException(ProblemNotFoundException e) {
+        log.error(e.getMessage(), e);
+        return error(ErrorType.NOT_FOUND_ERROR, HttpStatus.NOT_FOUND);
+    }
+
 
 
     // 400 BAD REQUEST
