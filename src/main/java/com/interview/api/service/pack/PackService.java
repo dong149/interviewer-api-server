@@ -14,6 +14,7 @@ import com.interview.api.repository.category.CategoryJpaRepository;
 import com.interview.api.repository.pack.PackJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +27,7 @@ public class PackService {
     private final PackJpaRepository packJpaRepository;
     private final CategoryJpaRepository categoryJpaRepository;
 
+    @Transactional(readOnly = true)
     public List<PackResponseDto> getPacks() {
 
 
@@ -44,6 +46,7 @@ public class PackService {
         return packResponseDtos;
     }
 
+    @Transactional(readOnly = true)
     public PackResponseDto getPackById(Long id) {
 
         Pack pack = packJpaRepository.findById(id).orElseThrow(() -> {
