@@ -3,7 +3,6 @@ package com.interview.api.controller.pack;
 
 import com.interview.api.dto.common.BaseResponseDto;
 import com.interview.api.dto.request.pack.PackRequestDto;
-import com.interview.api.dto.response.pack.PackResponseDto;
 import com.interview.api.service.pack.PackService;
 import io.swagger.annotations.*;
 import lombok.RequiredArgsConstructor;
@@ -11,13 +10,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @Api(tags = {"1. Pack"})
-@RequestMapping(value = "api/v1/interviewer")
+@RequestMapping(value = "api/v1/interviewer/pack")
 @RequiredArgsConstructor
 public class PackController {
+
+    // TODO : create를 좀 더 빨리할 수 있는 방법이 없을까
+    // TODO : random으로 return 하는 방법
 
     private final PackService packService;
 
@@ -38,6 +38,19 @@ public class PackController {
     public ResponseEntity<BaseResponseDto> createPack(@RequestBody PackRequestDto packRequestDto) {
         return new ResponseEntity<>(new BaseResponseDto(HttpStatus.CREATED.value(), "pack 생성 성공", packService.createPack(packRequestDto.getProblems(), packRequestDto.getCategoryId())), HttpStatus.CREATED);
     }
+
+    @PatchMapping(value = "/{packId}")
+    @ApiOperation(value = "pack", notes = "pack 카테고리 수정")
+    public ResponseEntity<BaseResponseDto> patchPackCategory(@PathVariable Long packId,@RequestParam Long categoryId) {
+        return new ResponseEntity<>(new BaseResponseDto(HttpStatus.CREATED.value(), "pack 카테고리 수정 성공", packService.patchPackCategory(packId,categoryId)), HttpStatus.CREATED);
+    }
+
+    @DeleteMapping(value="/{id}")
+    @ApiOperation(value = "pack", notes = "pack 삭제")
+    public ResponseEntity<BaseResponseDto> deletePack(@PathVariable Long id) {
+        return new ResponseEntity<>(new BaseResponseDto(HttpStatus.OK.value(), "pack 삭제 성공", packService.deletePack(id)), HttpStatus.OK);
+    }
+
 
 
 }
