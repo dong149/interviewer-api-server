@@ -49,5 +49,14 @@ public class Pack {
     private Category category;
 
 
+    public static void setDeletedAt(Pack pack){
+        pack.deletedAt = LocalDateTime.now();
+    }
+
+    public static void patchCategory(Pack pack,Category category){
+        pack.category = category;
+    }
+
+
 
 }

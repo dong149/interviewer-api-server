@@ -87,5 +87,30 @@ public class PackService {
         return true;
     }
 
+    public boolean patchPackCategory(Long packId, Long categoryId) {
+
+        Category category = categoryJpaRepository.findById(categoryId).orElseThrow(() -> {
+            throw new CategoryNotFoundException();
+        });
+
+        Pack pack = packJpaRepository.findById(packId).orElseThrow(() -> {
+            throw new PackNotFoundException();
+        });
+
+        Pack.patchCategory(pack, category);
+        packJpaRepository.save(pack);
+        return true;
+    }
+
+
+    public boolean deletePack(Long id) {
+        Pack pack = packJpaRepository.findById(id).orElseThrow(() -> {
+            throw new PackNotFoundException();
+        });
+        Pack.setDeletedAt(pack);
+
+        packJpaRepository.save(pack);
+        return true;
+    }
 
 }
