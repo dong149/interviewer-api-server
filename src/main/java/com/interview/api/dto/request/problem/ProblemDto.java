@@ -1,7 +1,7 @@
 package com.interview.api.dto.request.problem;
 
 
-import com.interview.api.dto.request.link.LinkDto;
+import com.interview.api.dto.request.link.LinkRequestDto;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,6 +21,6 @@ public class ProblemDto {
     private String content;
     @ApiModelProperty(example = "TCP는 연결 지향형 프로토콜이고 UDP는 데이터를 데이터그램단위로 전송하는 프로토콜입니다.")
     private String answer;
-    private List<LinkDto> links;
+    private List<LinkRequestDto> links;
 
 }

@@ -1,5 +1,6 @@
 package com.interview.api.entity.link;
 
+import com.interview.api.entity.problem.Problem;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -44,5 +45,11 @@ public class Link {
     @Column
     private LocalDateTime deletedAt;
 
+    public static void setDeletedAt(Link link) {
+        link.deletedAt = LocalDateTime.now();
+    }
 
+    public static void patchLink(Link link, String patchedUrl) {
+        link.url = patchedUrl;
+    }
 }

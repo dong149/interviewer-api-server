@@ -1,7 +1,7 @@
 package com.interview.api.service.pack;
 
 
-import com.interview.api.dto.request.link.LinkDto;
+import com.interview.api.dto.request.link.LinkRequestDto;
 import com.interview.api.dto.request.problem.ProblemDto;
 import com.interview.api.dto.response.pack.PackResponseDto;
 import com.interview.api.entity.category.Category;
@@ -66,9 +66,9 @@ public class PackService {
         List<Problem> problems = new ArrayList<>();
         for (ProblemDto problemDto : problemDtos) {
             List<Link> links = new ArrayList<>();
-            for (LinkDto linkDto : problemDto.getLinks()) {
+            for (LinkRequestDto linkRequestDto : problemDto.getLinks()) {
                 links.add(Link.builder()
-                        .url(linkDto.getUrl())
+                        .url(linkRequestDto.getUrl())
                         .build());
             }
 
