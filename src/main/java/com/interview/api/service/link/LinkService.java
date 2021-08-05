@@ -4,6 +4,8 @@ import com.interview.api.dto.request.link.LinkRequestDto;
 import com.interview.api.dto.response.link.LinkResponseDto;
 import com.interview.api.entity.link.Link;
 import com.interview.api.entity.problem.Problem;
+import com.interview.api.exception.link.AlreadyExistUrlException;
+import com.interview.api.exception.link.InvalidUrlFormatException;
 import com.interview.api.exception.link.LinkNotFoundException;
 import com.interview.api.exception.problem.ProblemNotFoundException;
 import com.interview.api.repository.link.LinkJpaRepository;
@@ -14,6 +16,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
+import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 @Service
@@ -22,6 +26,10 @@ public class LinkService {
 
     private final LinkJpaRepository linkJpaRepository;
     private final ProblemJpaRepository problemJpaRepository;
+
+    private static final String URL_FORMAT = "^((http|https)://)?(www.)?([a-zA-Z0-9]+)\\.{1}[a-z]+([a-zA-Z0-9])/?([a-zA-Z0-9]/?)+";
+    private static final String DELIMITER = ":";
+    private static final String[] PROTOCOL = {"https:", "//", ""};
 
     @Transactional(readOnly = true)
     public List<LinkResponseDto> getLinks() {
@@ -54,22 +62,38 @@ public class LinkService {
                 throw new ProblemNotFoundException();
             });
 
-            // TODO: url validation 체크
-
-            boolean isExist = problem.getLinks()
-                    .stream().anyMatch(link ->
-                            link.getUrl().equals(request.getUrl()));
-
-            // TODO: 중복 url 알림 방식. (제외하고 추가된 갯수 or exception occur)
-            if(!isExist) {
-                links.add(
-                        Link.builder()
-                                .url(request.getUrl())
-                                .build());
+            if(!Pattern.matches(URL_FORMAT, request.getUrl())){
+                throw new InvalidUrlFormatException("잘못된 URL 형식입니다. 주소를 다시 한 번 확인해 주세요.");
             }
 
-        });
+            // line 69 ~ 81: url rebuilding
+            boolean containsProtocol = request.getUrl().contains(PROTOCOL[1]);
 
+            StringBuilder urlBuilder = new StringBuilder();
+            urlBuilder.append(PROTOCOL[0])
+                    .append(containsProtocol ? PROTOCOL[2]: PROTOCOL[1]);
+
+            StringTokenizer token = new StringTokenizer(request.getUrl(), DELIMITER);
+            if(containsProtocol) token.nextToken();
+
+            while(token.hasMoreTokens()) {
+                urlBuilder.append(token.nextToken());
+            }
+
+            String url = urlBuilder.toString();
+            boolean isExist = problem.getLinks()
+                    .stream().anyMatch(link ->
+                            link.getUrl().equals(url));
+
+            if(isExist) {
+                throw new AlreadyExistUrlException("이미 등록된 url 주소입니다.");
+            }
+
+            links.add(
+                    Link.builder()
+                            .url(url)
+                            .build());
+        });
 
         linkJpaRepository.saveAll(links);
         return true;
@@ -80,6 +104,10 @@ public class LinkService {
         Link link = linkJpaRepository.findById(id).orElseThrow(() -> {
             throw new LinkNotFoundException();
         });
+
+        if(!Pattern.matches(URL_FORMAT, patchedUrl)) {
+            throw new InvalidUrlFormatException("잘못된 URL 형식입니다. 주소를 다시 한 번 확인해 주세요.");
+        }
 
         Link.patchLink(link, patchedUrl);
 
