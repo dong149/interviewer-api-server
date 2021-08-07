@@ -27,7 +27,7 @@ public class LinkService {
     private final LinkJpaRepository linkJpaRepository;
     private final ProblemJpaRepository problemJpaRepository;
 
-    private static final String URL_FORMAT = "^((http|https)://)?(www.)?([a-zA-Z0-9]+)\\.{1}[a-z]+([a-zA-Z0-9])/?([a-zA-Z0-9]/?)+";
+    private static final String URL_FORMAT = "^((http|https)://)?(www.)?([a-zA-Z0-9]+)\\.{1}[a-z]+([a-zA-Z0-9])/?([a-zA-Z0-9.-[=_$%+&~;:'\"]]/?)+";
     private static final String DELIMITER = ":";
     private static final String[] PROTOCOL = {"https:", "//", ""};
 
