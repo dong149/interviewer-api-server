@@ -57,7 +57,7 @@ public class PackService {
 
     }
 
-    public boolean createPack(List<ProblemDto> problemDtos, Long categoryId) {
+    public boolean createPack(List<ProblemDto> problemDtos, Long categoryId, String title, String description) {
 
         Category category = categoryJpaRepository.findById(categoryId).orElseThrow(() -> {
             throw new CategoryNotFoundException();
@@ -82,6 +82,8 @@ public class PackService {
         Pack pack = Pack.builder()
                 .problems(problems)
                 .category(category)
+                .title(title)
+                .description(description)
                 .build();
 
         packJpaRepository.save(pack);

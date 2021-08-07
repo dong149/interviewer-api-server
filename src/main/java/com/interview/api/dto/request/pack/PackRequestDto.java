@@ -15,5 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 public class PackRequestDto {
     private List<ProblemDto> problems;
+    private String title;
+    private String description;
     private Long categoryId;
 }

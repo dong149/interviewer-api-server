@@ -22,6 +22,8 @@ public class PackResponseDto {
 
     private Long id;
     private List<ProblemResponseDto> problems;
+    private String title;
+    private String description;
     private LocalDateTime createdAt;
     private Long categoryId;
     private String categoryName;
@@ -37,6 +39,8 @@ public class PackResponseDto {
                 .id(pack.getId())
                 .problems(ProblemResponseDto.of(pack.getProblems()))
                 .createdAt(pack.getCreatedAt())
+                .title(pack.getTitle())
+                .description(pack.getDescription())
                 .build();
     }
 
@@ -45,6 +49,8 @@ public class PackResponseDto {
                 .id(pack.getId())
                 .problems(ProblemResponseDto.of(pack.getProblems()))
                 .createdAt(pack.getCreatedAt())
+                .title(pack.getTitle())
+                .description(pack.getDescription())
                 .categoryId(category.getCategoryId())
                 .categoryName(category.getName())
                 .build();
