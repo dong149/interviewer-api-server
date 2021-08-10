@@ -1,7 +1,7 @@
 package com.interview.api.service.pack;
 
 
-import com.interview.api.dto.request.link.LinkDto;
+import com.interview.api.dto.request.link.LinkRequestDto;
 import com.interview.api.dto.request.problem.ProblemDto;
 import com.interview.api.dto.response.pack.PackResponseDto;
 import com.interview.api.entity.category.Category;
@@ -57,7 +57,7 @@ public class PackService {
 
     }
 
-    public boolean createPack(List<ProblemDto> problemDtos, Long categoryId) {
+    public boolean createPack(List<ProblemDto> problemDtos, Long categoryId, String title, String description) {
 
         Category category = categoryJpaRepository.findById(categoryId).orElseThrow(() -> {
             throw new CategoryNotFoundException();
@@ -66,9 +66,9 @@ public class PackService {
         List<Problem> problems = new ArrayList<>();
         for (ProblemDto problemDto : problemDtos) {
             List<Link> links = new ArrayList<>();
-            for (LinkDto linkDto : problemDto.getLinks()) {
+            for (LinkRequestDto linkRequestDto : problemDto.getLinks()) {
                 links.add(Link.builder()
-                        .url(linkDto.getUrl())
+                        .url(linkRequestDto.getUrl())
                         .build());
             }
 
@@ -82,6 +82,8 @@ public class PackService {
         Pack pack = Pack.builder()
                 .problems(problems)
                 .category(category)
+                .title(title)
+                .description(description)
                 .build();
 
         packJpaRepository.save(pack);

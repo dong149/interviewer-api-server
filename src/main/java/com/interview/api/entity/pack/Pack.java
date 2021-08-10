@@ -34,6 +34,13 @@ public class Pack {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column
+    private String title;
+
+    @Column
+    private String description;
+
+
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "packId")
     private List<Problem> problems;
@@ -49,14 +56,13 @@ public class Pack {
     private Category category;
 
 
-    public static void setDeletedAt(Pack pack){
+    public static void setDeletedAt(Pack pack) {
         pack.deletedAt = LocalDateTime.now();
     }
 
-    public static void patchCategory(Pack pack,Category category){
+    public static void patchCategory(Pack pack, Category category) {
         pack.category = category;
     }
-
 
 
 }

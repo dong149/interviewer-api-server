@@ -18,6 +18,7 @@ public class PackController {
 
     // TODO : create를 좀 더 빨리할 수 있는 방법이 없을까
     // TODO : random으로 return 하는 방법
+    // TODO : Validation 해주기da
 
     private final PackService packService;
 
@@ -36,7 +37,7 @@ public class PackController {
     @PostMapping
     @ApiOperation(value = "pack", notes = "pack 생성")
     public ResponseEntity<BaseResponseDto> createPack(@RequestBody PackRequestDto packRequestDto) {
-        return new ResponseEntity<>(new BaseResponseDto(HttpStatus.CREATED.value(), "pack 생성 성공", packService.createPack(packRequestDto.getProblems(), packRequestDto.getCategoryId())), HttpStatus.CREATED);
+        return new ResponseEntity<>(new BaseResponseDto(HttpStatus.CREATED.value(), "pack 생성 성공", packService.createPack(packRequestDto.getProblems(), packRequestDto.getCategoryId(),packRequestDto.getTitle(),packRequestDto.getDescription())), HttpStatus.CREATED);
     }
 
     @PatchMapping(value = "/{packId}")
