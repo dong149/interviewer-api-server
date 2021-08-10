@@ -18,7 +18,7 @@ public class PackController {
 
     // TODO : create를 좀 더 빨리할 수 있는 방법이 없을까
     // TODO : random으로 return 하는 방법
-    // TODO : Validation 해주기
+    // TODO : Validation 해주기da
 
     private final PackService packService;
 
