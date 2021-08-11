@@ -33,7 +33,7 @@ public class PackControllerTest extends AbstractControllerTest {
         //given
 
         //when
-        ResultActions resultActions = mockMvc.perform(get("/api/v1/interviewer/pack"));
+        ResultActions resultActions = mockMvc.perform(get("/api/v1/pack"));
 
         //then
         resultActions
@@ -45,7 +45,7 @@ public class PackControllerTest extends AbstractControllerTest {
         //given
 
         //when
-        ResultActions resultActions = mockMvc.perform(get("/api/v1/interviewer/pack/{id}", 1L));
+        ResultActions resultActions = mockMvc.perform(get("/api/v1/pack/{id}", 1L));
 
         //then
         resultActions
@@ -59,7 +59,7 @@ public class PackControllerTest extends AbstractControllerTest {
         params.add("categoryId", "1");
 
         //when
-        ResultActions resultActions = mockMvc.perform(patch("/api/v1/interviewer/pack/{id}", 1L)
+        ResultActions resultActions = mockMvc.perform(patch("/api/v1/pack/{id}", 1L)
                 .params(params)
         );
 
@@ -73,7 +73,7 @@ public class PackControllerTest extends AbstractControllerTest {
         //given
 
         //when
-        ResultActions resultActions = mockMvc.perform(delete("/api/v1/interviewer/pack/{id}", 1L));
+        ResultActions resultActions = mockMvc.perform(delete("/api/v1/pack/{id}", 1L));
 
         //then
         resultActions

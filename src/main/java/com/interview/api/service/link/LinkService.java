@@ -50,7 +50,7 @@ public class LinkService {
         return LinkResponseDto.of(link);
     }
 
-    public boolean createLink(LinkRequestDto[] linkRequestDtos) {
+    public boolean createLinks(LinkRequestDto[] linkRequestDtos) {
 
         List<Link> links = new ArrayList<>();
 

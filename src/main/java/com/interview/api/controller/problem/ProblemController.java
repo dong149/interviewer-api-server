@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @Api(tags = {"2. Problem"})
-@RequestMapping(value = "api/v1/interviewer/problem")
+@RequestMapping(value = "api/v1/problem")
 @RequiredArgsConstructor
 public class ProblemController {
 

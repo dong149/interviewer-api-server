@@ -17,7 +17,5 @@ import java.util.List;
 public class LinkRequestDto {
     @ApiModelProperty(example = "https://gmlwjd9405.github.io/2018/09/14/process-vs-thread.html")
     private String url;
-
     private Long problemId;
-
 }
