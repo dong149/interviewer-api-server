@@ -4,6 +4,7 @@ package com.interview.api.advice;
 import com.interview.api.dto.common.ErrorResponseDto;
 import com.interview.api.enumerator.ErrorType;
 import com.interview.api.exception.category.CategoryNotFoundException;
+import com.interview.api.exception.link.InvalidUrlFormatException;
 import com.interview.api.exception.pack.PackNotFoundException;
 import com.interview.api.exception.problem.ProblemNotFoundException;
 import lombok.extern.slf4j.Slf4j;
@@ -48,7 +49,11 @@ public class ExceptionControllerAdvice {
 
 
     // 400 BAD REQUEST
-
+    @ExceptionHandler(InvalidUrlFormatException.class)
+    public ResponseEntity<ErrorResponseDto> handleInvalidUrlFormatException(InvalidUrlFormatException e) {
+        log.error(e.getMessage(), e);
+        return error(ErrorType.BAD_REQUEST_ERROR, HttpStatus.BAD_REQUEST);
+    }
 
     // 500 INTERNAL SERVER ERROR
 

@@ -11,6 +11,7 @@ public enum ErrorType {
     UNEXPECTED_ERROR(-1, "예상하지 못한 에러입니다"),
     REST_ERROR(1, "통신에 문제가 발생했습니다"),
     BAD_REQUEST_ERROR(400, "잘못된 요청입니다."),
+    INVALID_URL_FORMAT_ERROR(400, "잘못된 요청입니다.")
     ;
 
     private final int errorCode;
