@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @Api(tags = {"3. Link"})
-@RequestMapping(value = "api/v1/interviewer/link")
+@RequestMapping(value = "api/v1/link")
 @RequiredArgsConstructor
 public class LinkController {
 
@@ -31,9 +31,9 @@ public class LinkController {
     }
 
     @PostMapping
-    @ApiOperation(value = "link", notes = "link 생성")
-    public ResponseEntity<BaseResponseDto> createLink(@RequestBody LinkRequestDto[] linkRequestDtos) {
-        return new ResponseEntity<>(new BaseResponseDto(HttpStatus.CREATED.value(), "link 생성 성공", linkService.createLink(linkRequestDtos)), HttpStatus.CREATED);
+    @ApiOperation(value = "link", notes = "link 여러개 생성")
+    public ResponseEntity<BaseResponseDto> createLinks(@RequestBody LinkRequestDto[] linkRequestDtos) {
+        return new ResponseEntity<>(new BaseResponseDto(HttpStatus.CREATED.value(), "link 생성 성공", linkService.createLinks(linkRequestDtos)), HttpStatus.CREATED);
     }
 
     @PatchMapping(value = "/{id}")

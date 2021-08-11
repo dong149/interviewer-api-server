@@ -13,10 +13,9 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @Api(tags = {"4. Category"})
-@RequestMapping(value = "api/v1/interviewer/category")
+@RequestMapping(value = "api/v1/category")
 @RequiredArgsConstructor
 public class CategoryController {
-    // TODO : CRUD
     private final CategoryService categoryService;
 
     @PostMapping

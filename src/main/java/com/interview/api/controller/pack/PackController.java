@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @Api(tags = {"1. Pack"})
-@RequestMapping(value = "api/v1/interviewer/pack")
+@RequestMapping(value = "api/v1/pack")
 @RequiredArgsConstructor
 public class PackController {
 
