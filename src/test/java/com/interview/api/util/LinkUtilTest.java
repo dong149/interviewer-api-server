@@ -12,7 +12,6 @@ public class LinkUtilTest {
     private String correctUrl;
     private String wrongUrl;
 
-
     /*
     url 검증 테스트
      */

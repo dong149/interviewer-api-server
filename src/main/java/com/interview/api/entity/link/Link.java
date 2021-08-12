@@ -49,7 +49,7 @@ public class Link {
         link.deletedAt = LocalDateTime.now();
     }
 
-    public static void patchLink(Link link, String patchedUrl) {
+    public static void patchUrl(Link link, String patchedUrl) {
         link.url = patchedUrl;
     }
 }

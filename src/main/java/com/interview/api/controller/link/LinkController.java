@@ -21,13 +21,13 @@ public class LinkController {
     @GetMapping
     @ApiOperation(value = "link", notes = "link 전체 조회")
     public ResponseEntity<BaseResponseDto> getLinks() {
-        return new ResponseEntity<>(new BaseResponseDto(HttpStatus.OK.value(), "link 전체 조회 성공", linkService.getLinks()), HttpStatus.OK);
+        return new ResponseEntity<>(new BaseResponseDto(HttpStatus.OK.value(), "link 전체 조회 성공", linkService.getLinkResponseDtoList()), HttpStatus.OK);
     }
 
     @GetMapping(value = "/{id}")
     @ApiOperation(value = "link", notes = "Id로 link 조회")
     public ResponseEntity<BaseResponseDto> getLinkById(@PathVariable Long id) {
-        return new ResponseEntity<>(new BaseResponseDto(HttpStatus.OK.value(), "Id로 link 조회 성공", linkService.getLinkById(id)), HttpStatus.OK);
+        return new ResponseEntity<>(new BaseResponseDto(HttpStatus.OK.value(), "Id로 link 조회 성공", linkService.getLinkResponseDtoById(id)), HttpStatus.OK);
     }
 
     @PostMapping

@@ -16,12 +16,9 @@ public class CategoryService {
     private final CategoryJpaRepository categoryJpaRepository;
 
     public boolean createCategory(CategoryRequestDto categoryRequestDto) {
-
-
         Category category = Category.builder()
                 .name(categoryRequestDto.getName())
                 .build();
-
 
         categoryJpaRepository.save(category);
         return true;
